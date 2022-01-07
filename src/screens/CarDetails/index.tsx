@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Button } from '../../components/Button';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
@@ -24,7 +25,8 @@ import {
   Period,
   Price,
   About,
-  Accessories
+  Accessories,
+  Footer
 } from './styles';
 
 export function CarDetails() {
@@ -66,7 +68,19 @@ export function CarDetails() {
           Este é automovel desportivo. Surgiu do lendario 
           touro de lide idultado na praça Real Maestranza de Servilla.
           </About>
+          <About>
+          Este é automovel desportivo. Surgiu do lendario 
+          touro de lide idultado na praça Real Maestranza de Servilla.
+          </About>
+          <About>
+          Este é automovel desportivo. Surgiu do lendario 
+          touro de lide idultado na praça Real Maestranza de Servilla.
+          </About>
         </Content>
+
+        <Footer>
+          <Button title="Confirmar" />
+        </Footer>
     </Container>
   );
 }
