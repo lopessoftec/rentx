@@ -1,4 +1,7 @@
 import React from 'react';
+import { Feather } from '@expo/vector-icons';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
 import { BackButton } from '../../components/BackButton';
@@ -24,12 +27,23 @@ import {
   Rent,
   Period,
   Price,
-  About,
   Accessories,
-  Footer
+  Footer,
+  RentalPeriod,
+  CalendarIcon,
+  Dateinfo,
+  DateTitle,
+  DateValue,
+  RentalPrice,
+  RentalPriceLabel,
+  RentalPriceDetails,
+  RentalPriceQuota,
+  RentalPriceTotal,
 } from './styles';
 
-export function CarDetails() {
+export function SchedulingDetails() {
+  const theme = useTheme();
+
   return (
     <Container>
         <Header>
@@ -64,10 +78,40 @@ export function CarDetails() {
             <Accessory name="2 pessoas" icon={peopleSvg}/>
           </Accessories>
 
-          <About>
-          Este é automovel desportivo. Surgiu do lendario 
-          touro de lide idultado na praça Real Maestranza de Servilla.
-          </About>
+          <RentalPeriod>
+            <CalendarIcon>
+              <Feather 
+                name="calendar"
+                size={RFValue(24)}
+                color={theme.colors.shape}
+              />
+            </CalendarIcon>
+
+            <Dateinfo>
+              <DateTitle>DE</DateTitle>
+              <DateValue>18/06/2021</DateValue>
+            </Dateinfo>
+
+            <Feather 
+              name="chevron-right"
+              size={RFValue(10)}
+              color={theme.colors.text}
+            />
+
+            <Dateinfo>
+              <DateTitle>DE</DateTitle>
+              <DateValue>18/06/2021</DateValue>
+            </Dateinfo>
+
+          </RentalPeriod>
+
+          <RentalPrice>
+            <RentalPriceLabel>TOTAL</RentalPriceLabel>
+            <RentalPriceDetails>
+              <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+              <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+            </RentalPriceDetails>
+          </RentalPrice>
         </Content>
 
         <Footer>
