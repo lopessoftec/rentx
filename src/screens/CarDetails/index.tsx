@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useNavigation } from '@react-navigation/native';
 import { Button } from '../../components/Button';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
@@ -30,49 +31,55 @@ import {
 } from './styles';
 
 export function CarDetails() {
+  const navigation = useNavigation<any>();
+
+  function handleConfirmRental() {
+    navigation.navigate('Scheduling')
+  }
+
   return (
     <Container>
-        <Header>
-            <BackButton onPress={() => {}}/>
-        </Header>
+      <Header>
+        <BackButton onPress={() => { }} />
+      </Header>
 
-        <CarImages>
-          <ImageSlider 
-            imageUrl={['https://pngimg.com/uploads/audi/audi_PNG99491.png']}
-          />
-        </CarImages>
+      <CarImages>
+        <ImageSlider
+          imageUrl={['https://pngimg.com/uploads/audi/audi_PNG99491.png']}
+        />
+      </CarImages>
 
-        <Content>
-          <Details>
-            <Descriptions>
-              <Brand>Lamborghini</Brand>
-              <Name>Huracan</Name>
-            </Descriptions>
+      <Content>
+        <Details>
+          <Descriptions>
+            <Brand>Lamborghini</Brand>
+            <Name>Huracan</Name>
+          </Descriptions>
 
-            <Rent>
-              <Period>Ao dia</Period>
-              <Price>R$ 580,00</Price>
-            </Rent>
-          </Details>
+          <Rent>
+            <Period>Ao dia</Period>
+            <Price>R$ 580,00</Price>
+          </Rent>
+        </Details>
 
-          <Accessories>
-            <Accessory name="380km/h" icon={speedSvg}/>
-            <Accessory name="3.2s" icon={accelerationSvg}/>
-            <Accessory name="800 HP" icon={forceSvg}/>
-            <Accessory name="Gasoline" icon={gasolineSvg}/>
-            <Accessory name="Auto" icon={exchangeSvg}/>
-            <Accessory name="2 pessoas" icon={peopleSvg}/>
-          </Accessories>
+        <Accessories>
+          <Accessory name="380km/h" icon={speedSvg} />
+          <Accessory name="3.2s" icon={accelerationSvg} />
+          <Accessory name="800 HP" icon={forceSvg} />
+          <Accessory name="Gasoline" icon={gasolineSvg} />
+          <Accessory name="Auto" icon={exchangeSvg} />
+          <Accessory name="2 pessoas" icon={peopleSvg} />
+        </Accessories>
 
-          <About>
-          Este é automovel desportivo. Surgiu do lendario 
+        <About>
+          Este é automovel desportivo. Surgiu do lendario
           touro de lide idultado na praça Real Maestranza de Servilla.
-          </About>
-        </Content>
+        </About>
+      </Content>
 
-        <Footer>
-          <Button title="Confirmar" />
-        </Footer>
+      <Footer>
+        <Button title="Escolher periodo do aluguel" onPress={handleConfirmRental} />
+      </Footer>
     </Container>
   );
 }

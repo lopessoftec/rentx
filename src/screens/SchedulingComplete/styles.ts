@@ -5,7 +5,7 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.header};
 
-  padding-top: 80px;
+  padding-top: 96px;
 `;
 
 export const Content = styled.View`
@@ -13,14 +13,14 @@ export const Content = styled.View`
   justify-content: center;
   align-items: center;
 
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 `;
 export const Title = styled.Text`
   font-size: ${RFValue(30)}px;
   color: ${({ theme }) => theme.colors.shape};
   font-family: ${({ theme }) => theme.fonts.secondary_600};
 
-  margin-top: 50px;
+  margin-top: 40px;
 `;
 export const Message = styled.Text`
   font-size: ${RFValue(15)}px;
@@ -36,5 +36,5 @@ export const Footer = styled.View`
   width: 100%;
   align-items: center;
 
-  /* margin: 0 0; */
+  margin: 50px 0;
 `;

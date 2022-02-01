@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
@@ -43,80 +45,89 @@ import {
 
 export function SchedulingDetails() {
   const theme = useTheme();
+  const navigation = useNavigation<any>();
+
+  function handleConfirmRental() {
+    navigation.navigate('SchedulingComplete')
+  }
 
   return (
     <Container>
-        <Header>
-            <BackButton onPress={() => {}}/>
-        </Header>
+      <Header>
+        <BackButton onPress={() => { }} />
+      </Header>
 
-        <CarImages>
-          <ImageSlider 
-            imageUrl={['https://pngimg.com/uploads/audi/audi_PNG99491.png']}
-          />
-        </CarImages>
+      <CarImages>
+        <ImageSlider
+          imageUrl={['https://pngimg.com/uploads/audi/audi_PNG99491.png']}
+        />
+      </CarImages>
 
-        <Content>
-          <Details>
-            <Descriptions>
-              <Brand>Lamborghini</Brand>
-              <Name>Huracan</Name>
-            </Descriptions>
+      <Content>
+        <Details>
+          <Descriptions>
+            <Brand>Lamborghini</Brand>
+            <Name>Huracan</Name>
+          </Descriptions>
 
-            <Rent>
-              <Period>Ao dia</Period>
-              <Price>R$ 580,00</Price>
-            </Rent>
-          </Details>
+          <Rent>
+            <Period>Ao dia</Period>
+            <Price>R$ 580,00</Price>
+          </Rent>
+        </Details>
 
-          <Accessories>
-            <Accessory name="380km/h" icon={speedSvg}/>
-            <Accessory name="3.2s" icon={accelerationSvg}/>
-            <Accessory name="800 HP" icon={forceSvg}/>
-            <Accessory name="Gasoline" icon={gasolineSvg}/>
-            <Accessory name="Auto" icon={exchangeSvg}/>
-            <Accessory name="2 pessoas" icon={peopleSvg}/>
-          </Accessories>
+        <Accessories>
+          <Accessory name="380km/h" icon={speedSvg} />
+          <Accessory name="3.2s" icon={accelerationSvg} />
+          <Accessory name="800 HP" icon={forceSvg} />
+          <Accessory name="Gasoline" icon={gasolineSvg} />
+          <Accessory name="Auto" icon={exchangeSvg} />
+          <Accessory name="2 pessoas" icon={peopleSvg} />
+        </Accessories>
 
-          <RentalPeriod>
-            <CalendarIcon>
-              <Feather 
-                name="calendar"
-                size={RFValue(24)}
-                color={theme.colors.shape}
-              />
-            </CalendarIcon>
-
-            <Dateinfo>
-              <DateTitle>DE</DateTitle>
-              <DateValue>18/06/2021</DateValue>
-            </Dateinfo>
-
-            <Feather 
-              name="chevron-right"
-              size={RFValue(10)}
-              color={theme.colors.text}
+        <RentalPeriod>
+          <CalendarIcon>
+            <Feather
+              name="calendar"
+              size={RFValue(24)}
+              color={theme.colors.shape}
             />
+          </CalendarIcon>
 
-            <Dateinfo>
-              <DateTitle>DE</DateTitle>
-              <DateValue>18/06/2021</DateValue>
-            </Dateinfo>
+          <Dateinfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>18/06/2021</DateValue>
+          </Dateinfo>
 
-          </RentalPeriod>
+          <Feather
+            name="chevron-right"
+            size={RFValue(10)}
+            color={theme.colors.text}
+          />
 
-          <RentalPrice>
-            <RentalPriceLabel>TOTAL</RentalPriceLabel>
-            <RentalPriceDetails>
-              <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
-              <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
-            </RentalPriceDetails>
-          </RentalPrice>
-        </Content>
+          <Dateinfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>18/06/2021</DateValue>
+          </Dateinfo>
 
-        <Footer>
-          <Button title="Confirmar" />
-        </Footer>
+        </RentalPeriod>
+
+        <RentalPrice>
+          <RentalPriceLabel>TOTAL</RentalPriceLabel>
+          <RentalPriceDetails>
+            <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+            <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+          </RentalPriceDetails>
+        </RentalPrice>
+      </Content>
+
+      <Footer>
+        <Button
+          title="Alugar agora"
+          color={theme.colors.success}
+          onPress={handleConfirmRental}
+        />
+      </Footer>
     </Container>
   );
 }
