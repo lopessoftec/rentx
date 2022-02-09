@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
@@ -6,7 +6,12 @@ import { StatusBar } from 'react-native';
 
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
-import { Calendar } from '../Calendar';
+import { 
+    Calendar, 
+    DayProps, 
+    generateInterval,
+    MarkedDateProps
+} from '../../components/Calendar';
 
 import ArrowSvg from '../../assets/arrow.svg';
 
@@ -23,11 +28,32 @@ import {
 } from './styles';
 
 export function Scheduling() {
+    const [ lastSelectedDate, setLastSelectedDate ] = useState<DayProps>({} as DayProps);
+    const [markedDates, setMarkedDates] = useState<MarkedDateProps>({} as MarkedDateProps);
+    
     const theme = useTheme();
     const navigation = useNavigation<any>();
 
     function handleConfirmRental() {
         navigation.navigate('SchedulingDetails')
+    }
+
+    function handleBack() {
+        navigation.goBack();
+    }
+
+    function handleChangeDate(date: DayProps){
+        let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+        let end = date;
+
+        if(start.timestamp > end.timestamp){
+            start = end;
+            end = start;
+        }
+
+        setLastSelectedDate(end);
+        const interval = generateInterval(start, end);
+        setMarkedDates(interval);
     }
 
     return (
@@ -39,7 +65,7 @@ export function Scheduling() {
                     backgroundColor='transparent'
                 />
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleBack}
                     color={theme.colors.shape}
                 />
 
@@ -69,7 +95,10 @@ export function Scheduling() {
             </Header>
 
             <Content>
-                <Calendar />
+                <Calendar 
+                    markedDates={markedDates}
+                    onDayPress={handleChangeDate}
+                />
             </Content>
 
             <Footer>
