@@ -38,7 +38,7 @@ interface RentalPeriod {
 
 interface Params {
     car: CarDTO;
-  }
+}
 
 export function Scheduling() {
     const [ lastSelectedDate, setLastSelectedDate ] = useState<DayProps>({} as DayProps);
