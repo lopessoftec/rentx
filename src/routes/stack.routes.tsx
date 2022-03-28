@@ -21,6 +21,9 @@ export function StackRoutes() {
             <Screen
                 name="Home"
                 component={Home}
+                options={{
+                    gestureEnabled: false //desabilita os geestos de navegação ios
+                }}
             />
             <Screen
                 name="CarDetails"
