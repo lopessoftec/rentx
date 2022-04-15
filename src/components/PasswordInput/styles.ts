@@ -1,11 +1,10 @@
 import { RFValue } from 'react-native-responsive-fontsize';
 import { TextInput } from 'react-native';
 import styled from 'styled-components/native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex-direction: row;
-
-  margin-bottom: 8px;
 `;
 
 export const IconContainer = styled.View`
@@ -30,3 +29,6 @@ export const InputText = styled(TextInput)`
 
   padding: 0 23px;
 `;
+
+// BorderlessButton botão quie não tem borda e nem fundo
+export const ChangePasswordVisibilityButton = styled(BorderlessButton)``;
