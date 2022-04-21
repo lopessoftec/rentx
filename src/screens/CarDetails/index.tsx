@@ -52,7 +52,6 @@ export function CarDetails() {
   const scrollY = useSharedValue(0);
   const scrolHandle = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y; //armazena a posição do scroll
-    console.log(event.contentOffset.y);
   });
 
   //irá fazer desapareecer o carro
