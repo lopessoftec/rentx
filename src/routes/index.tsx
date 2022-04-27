@@ -8,8 +8,9 @@ import { AuthRoutes } from './auth.routes';
 export function Routes() {
   const { user } = useAuth();
   return (
+    // se tem user.id ele vai para AppTabRoutes/>, se não está logado, ele vai para AuthRoutes
     <NavigationContainer>
-        { user ? < AppTabRoutes/> : <AuthRoutes /> }
+        { user.id ? < AppTabRoutes/> : <AuthRoutes /> }
     </NavigationContainer>
   );
 }
