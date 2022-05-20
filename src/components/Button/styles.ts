@@ -10,7 +10,7 @@ interface ButtonTextProps {
   light: boolean;
 }
 
-export const Container = styled(RectButton) <ButtonProps>`
+export const Container = styled.TouchableOpacity<ButtonProps>`
   width: 100%;
 
   padding: 19px;
