@@ -23,9 +23,9 @@ export function AppTabRoutes() {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                height: 78,
-                paddingVertical: Platform.OS === 'ios' ? 20 : 0,
-                backgroundColor: theme.colors.background_primary
+                    height: 78,
+                    paddingVertical: Platform.OS === 'ios' ? 20 : 0,
+                    backgroundColor: theme.colors.background_primary
                 },
                 tabBarActiveTintColor: theme.colors.main,
                 tabBarInactiveTintColor: theme.colors.text_detail
@@ -33,11 +33,11 @@ export function AppTabRoutes() {
         >
             {/* quanod clicado na home, irei chamar uma nova pilha de navegação AppStackRoutes */}
             <Screen
-                name="Home"
+                name="Start"
                 component={AppStackRoutes}
                 options={{
                     tabBarIcon: (({ color }) => (
-                        <HomeSvg width={24} height={24} fill={color}/>
+                        <HomeSvg width={24} height={24} fill={color} />
                     ))
                 }}
             />
@@ -46,7 +46,7 @@ export function AppTabRoutes() {
                 component={MyCars}
                 options={{
                     tabBarIcon: (({ color }) => (
-                        <CarSvg width={24} height={24} fill={color}/>
+                        <CarSvg width={24} height={24} fill={color} />
                     ))
                 }}
             />
@@ -55,10 +55,10 @@ export function AppTabRoutes() {
                 component={Profile}
                 options={{
                     tabBarIcon: (({ color }) => (
-                        <PeopleSvg width={24} height={24} fill={color}/>
+                        <PeopleSvg width={24} height={24} fill={color} />
                     ))
                 }}
-            />            
+            />
         </Navigator>
     )
 }

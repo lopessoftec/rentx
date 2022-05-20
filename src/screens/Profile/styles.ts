@@ -54,7 +54,13 @@ export const Photo = styled.Image`
   border-radius: 90px;
 `;
 
-export const PhotoButton = styled(RectButton)`
+export const CameraContainer = styled.View`
+  flex: 1;
+  position: absolute;
+  background-color: red;
+`;
+
+export const PhotoButton = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
 
@@ -62,9 +68,9 @@ export const PhotoButton = styled(RectButton)`
   justify-content: center;
   align-items: center;
 
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  /* position: absolute; */
+  /* bottom: 10px;
+  right: 10px; */
 `;
 
 export const Content = styled.View`
