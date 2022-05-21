@@ -34,7 +34,6 @@ import {
   Option,
   OptionTitle,
   Section,
-  CameraContainer
 } from "./styles";
 
 export function Profile() {
@@ -147,15 +146,13 @@ export function Profile() {
 
             <PhotoContainer>
               {!!avatar && <Photo source={{ uri: avatar }} />}
-              <CameraContainer>
-                <PhotoButton onPress={handleAvatarSelect}>
-                  <Feather
-                    name="camera"
-                    size={24}
-                    color={theme.colors.shape}
-                  />
-                </PhotoButton>
-              </CameraContainer>
+              <PhotoButton onPress={handleAvatarSelect}>
+                <Feather
+                  name="camera"
+                  size={24}
+                  color={theme.colors.shape}
+                />
+              </PhotoButton>
             </PhotoContainer>
           </Header>
 
