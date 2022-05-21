@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StatusBar } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import Logo from '../../assets/logo.svg';
 import { api } from '../../services/api';
@@ -22,6 +23,7 @@ export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const netInfo = useNetInfo();
   const navigation = useNavigation();
 
   function handleCarDetails(car: CarDTO) {
@@ -30,16 +32,16 @@ export function Home() {
   useEffect(() => {
     let isMonted = true;
 
-    async function fetchCars(){
+    async function fetchCars() {
       try {
         const response = await api.get('/cars');
-        if(isMonted){
+        if (isMonted) {
           setCars(response.data);
-        }        
+        }
       } catch (error) {
         console.log(error);
-      }finally{
-        if(isMonted){
+      } finally {
+        if (isMonted) {
           setLoading(false)
         }
       }
@@ -51,7 +53,15 @@ export function Home() {
     return () => {
       isMonted = false;
     };
-  },[]);
+  }, []);
+
+  useEffect(() => {
+    if (netInfo.isConnected) {
+      Alert.alert('Você está On-line')
+    } else {
+      Alert.alert('Você está Of-Line')
+    }
+  }, [netInfo.isConnected])
 
   return (
     <Container>
@@ -69,13 +79,13 @@ export function Home() {
           {
             !loading &&
             <TotalCars>
-              Total de { cars.length } carros
+              Total de {cars.length} carros
             </TotalCars>
           }
-          
+
         </HeaderContent>
       </Header>
-      {loading ? <LoadAnimation/>: 
+      {loading ? <LoadAnimation /> :
         <CarList
           data={cars}
           keyExtractor={item => item.id}
