@@ -36,7 +36,6 @@ import {
   Accessories,
   Footer
 } from './styles';
-import styled from 'styled-components/native';
 
 interface Params {
   car: CarDTO;
@@ -46,7 +45,7 @@ export function CarDetails() {
   const navigation = useNavigation<any>();
   const route = useRoute();
   const { car } = route.params as Params;
-
+  console.log(car);
   const theme = useTheme();
 
   const scrollY = useSharedValue(0);
@@ -78,16 +77,16 @@ export function CarDetails() {
   });
 
   function handleConfirmRental() {
-    navigation.navigate('Scheduling', {car});
+    navigation.navigate('Scheduling', { car });
   }
 
-  function handleBack(){
+  function handleBack() {
     navigation.goBack();
   }
 
   return (
     <Container>
-      <StatusBar 
+      <StatusBar
         barStyle="dark-content"
         translucent
         backgroundColor="transparent"
@@ -95,19 +94,25 @@ export function CarDetails() {
 
       <Animated.View
         style={[
-          headerStyleAnimation, 
+          headerStyleAnimation,
           styles.header,
           { backgroundColor: theme.colors.background_secondary }
         ]}
       >
         <Header>
-          <BackButton onPress={handleBack} />
+          <BackButton
+            onPress={handleBack}
+
+          />
         </Header>
 
         <Animated.View style={sliderCarsStyleAnimation}>
           <CarImages>
             <ImageSlider
-              imageUrl={car.photos}
+              imagesUrl={
+                !!car.photos ?
+                  car.photos : [{ id: car.thumbnail, photo: car.thumbnail }]
+              }
             />
           </CarImages>
         </Animated.View>
@@ -117,9 +122,9 @@ export function CarDetails() {
         paddingHorizontal: 24,
         paddingTop: getStatusBarHeight() + 160,
       }}
-      showsHorizontalScrollIndicator={false}
-      onScroll={scrolHandle}
-      scrollEventThrottle={16}
+        showsHorizontalScrollIndicator={false}
+        onScroll={scrolHandle}
+        scrollEventThrottle={16}
       >
         <Details>
           <Descriptions>
@@ -133,16 +138,17 @@ export function CarDetails() {
           </Rent>
         </Details>
 
-        <Accessories>
-          {
-            car.accessories.map(accessory => (
-              <Accessory 
-              key={accessory.type}
-              name={accessory.name} 
-              icon={getAcessoryicon(accessory.type)} />
-            ))
-          }
-        </Accessories>
+        {car.accessories &&
+          <Accessories>
+            {
+              car.accessories.map(accessory => (
+                <Accessory
+                  key={accessory.type}
+                  name={accessory.name}
+                  icon={getAcessoryicon(accessory.type)} />
+              ))
+            }
+          </Accessories>}
 
         <About>
           {car.about}
