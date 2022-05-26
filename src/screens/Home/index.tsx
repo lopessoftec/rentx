@@ -38,6 +38,7 @@ export function Home() {
     await synchronize({
       database,
       pullChanges: async ({ lastPulledAt }) => {
+        console.log(lastPulledAt);
         const response = await api
           .get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`);
 
