@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, FlatList } from 'react-native';
 import { useTheme } from 'styled-components';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useIsFocused } from '@react-navigation/core';
 import { AntDesign } from '@expo/vector-icons';
 import { format, parseISO } from 'date-fns';
 import { BackButton } from '../../components/BackButton';
@@ -9,7 +9,6 @@ import { LoadAnimation } from '../../components/LoadAnimation';
 
 import { Car } from '../../components/Car';
 import { Car as ModelCar } from '../../database/model/Car';
-import { CarDTO } from '../../dtos/CarDTO';
 import { api } from '../../services/api';
 
 import {
@@ -28,14 +27,6 @@ import {
   CarFooterDate
 } from './styles';
 
-interface CarProps {
-  id: string;
-  user_id: string;
-  car: CarDTO;
-  startDate: string;
-  endDate: string;
-}
-
 interface DataProps {
   id: string;
   car: ModelCar;
@@ -46,6 +37,7 @@ interface DataProps {
 export function MyCars() {
   const [cars, setCars] = useState<DataProps[]>([]);
   const [loading, setLoading] = useState(true);
+  const screensIsFocused = useIsFocused();
 
   const navigation = useNavigation();
   const theme = useTheme();
@@ -75,7 +67,7 @@ export function MyCars() {
     }
 
     fetchCars();
-  }, []);
+  }, [screensIsFocused]);
 
   return (
     <Container>
