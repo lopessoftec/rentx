@@ -8,6 +8,7 @@ import { LoadAnimation } from '../components/LoadAnimation';
 
 export function Routes() {
   const { user, loading } = useAuth();
+
   return (
     loading ? <LoadAnimation /> :
       // se tem user.id ele vai para AppTabRoutes/>, se não está logado, ele vai para AuthRoutes

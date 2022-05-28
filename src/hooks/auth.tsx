@@ -9,6 +9,7 @@ import React, {
 import { api } from '../services/api';
 import { database } from '../database';
 import { User as ModelUser } from '../database/model/User';
+import { Alert } from 'react-native';
 
 interface User {
     id: string;
@@ -45,12 +46,24 @@ function AuthProvider({ children }: AuthProviderProps) {
     const [loading, setLoading] = useState(true);
 
     async function signIn({ email, password }: SignInCredentials) {
-
+        setLoading(true);
+        console.log('1');
         try {
             const response = await api.post('/sessions', {
                 email,
                 password
             });
+
+            if (response.data.message === "Email or password incorret!") {
+                setLoading(false);
+
+                return Alert.alert(
+                    'Erro na autenticação',
+                    'E-mail ou usuário inválido!'
+                )
+            }
+
+            setLoading(false);
 
             const { token, user } = response.data;
             //axios permite adicionar no cabeçalho, toda vez que logar já guarda o token
@@ -71,6 +84,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             // pego tudo que vem do usuario com ...user
             setData({ ...user, token });
         } catch (error) {
+            setLoading(false);
             throw new Error(error); //irá lançar para quem chamou o erro e não trata aqui
         }
     }
@@ -113,19 +127,22 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     useEffect(() => {
         async function loadUserData() {
+            console.log('2');
             const userCollection = database.get<ModelUser>('users');
             const response = await userCollection.query().fetch();
 
             if (response.length > 0) {
                 const userData = response[0]._raw as unknown as User; // forçar uma tipagem unknown as User;
                 api.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+
                 setData(userData);
-                setLoading(false);
             }
+
+            setLoading(false);
         }
 
         loadUserData();
-    })
+    }, []);
 
     return (
         <AuthContext.Provider
