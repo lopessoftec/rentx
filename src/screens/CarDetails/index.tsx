@@ -170,7 +170,8 @@ export function CarDetails() {
                   icon={getAcessoryicon(accessory.type)} />
               ))
             }
-          </Accessories>}
+          </Accessories>
+        }
 
         <About>
           {car.about}
